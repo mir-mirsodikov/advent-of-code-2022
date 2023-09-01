@@ -1,11 +1,12 @@
 mod day_01;
 mod day_02;
+mod day_03;
 mod utils;
 
-use crate::{day_01::handle_day_01, day_02::handle_day_02};
+use crate::{day_01::handle_day_01, day_02::handle_day_02, day_03::handle_day_03};
 
 fn main() {
-    println!("Hello, world!");
+    println!("Advent of Code 2022");
 
     let args = std::env::args().collect::<Vec<String>>();
 
@@ -30,6 +31,7 @@ fn main() {
     match day {
         1 => handle_day_01(part),
         2 => handle_day_02(part),
+        3 => handle_day_03(part),
         _ => println!("Day {} not implemented yet", day),
     };
 }

@@ -1,29 +1,27 @@
-/// 
+///
 /// Advent of Code Day 2 : Rock Paper Scissors
-/// 
-/// The Elves begin to set up camp on the beach. 
+///
+/// The Elves begin to set up camp on the beach.
 /// To decide whose tent gets to be closest to the snack storage, a giant Rock Paper Scissors tournament is already in progress.
-/// 
-/// Appreciative of your help yesterday, one Elf gives you an encrypted strategy guide (your puzzle input) 
-/// that they say will be sure to help you win. 
-/// "The first column is what your opponent is going to play: A for Rock, B for Paper, and C for Scissors. The second column--" 
+///
+/// Appreciative of your help yesterday, one Elf gives you an encrypted strategy guide (your puzzle input)
+/// that they say will be sure to help you win.
+/// "The first column is what your opponent is going to play: A for Rock, B for Paper, and C for Scissors. The second column--"
 /// Suddenly, the Elf is called away to help with someone's tent.
-/// 
-/// The second column, you reason, must be what you should play in response: 
-/// X for Rock, Y for Paper, and Z for Scissors. Winning every time would be suspicious, 
+///
+/// The second column, you reason, must be what you should play in response:
+/// X for Rock, Y for Paper, and Z for Scissors. Winning every time would be suspicious,
 /// so the responses must have been carefully chosen.
-/// 
-/// The winner of the whole tournament is the player with the highest score. 
-/// Your total score is the sum of your scores for each round. 
-/// The score for a single round is the score for the shape you selected (1 for Rock, 2 for Paper, and 3 for Scissors) 
+///
+/// The winner of the whole tournament is the player with the highest score.
+/// Your total score is the sum of your scores for each round.
+/// The score for a single round is the score for the shape you selected (1 for Rock, 2 for Paper, and 3 for Scissors)
 /// plus the score for the outcome of the round (0 if you lost, 3 if the round was a draw, and 6 if you won).
-/// 
-/// Since you can't be sure if the Elf is trying to help you or trick you, 
+///
+/// Since you can't be sure if the Elf is trying to help you or trick you,
 /// you should calculate the score you would get if you were to follow the strategy guide.
-/// 
+///
 /// https://adventofcode.com/2022/day/2
-
-
 use crate::utils::{get_file_for_day, print_results};
 
 pub fn handle_day_02(part: u8) {
@@ -111,6 +109,9 @@ fn play_game(player_1: String, player_2: String) -> u32 {
     score
 }
 
+/// Given the desired outcome and the player 1's hand
+/// determine the hand that player 2 would have to play
+/// and return the total score
 fn get_score_for_desired_outcome(outcome: String, player_1: String) -> u32 {
     let desired_outcome = match outcome.as_str() {
         "X" => GameOutcome::Lose,
@@ -138,6 +139,7 @@ fn get_score_for_desired_outcome(outcome: String, player_1: String) -> u32 {
     score
 }
 
+/// What would your total score be if everything goes exactly according to your strategy guide?
 fn part_1() -> u32 {
     let contents = get_file_for_day(2);
 
@@ -154,6 +156,8 @@ fn part_1() -> u32 {
     score
 }
 
+/// X means you need to lose, Y means you need to end the round in a draw, and Z means you need to win
+/// What would your total score be if everything goes exactly according to your strategy guide?
 fn part_2() -> u32 {
     let contents = get_file_for_day(2);
 
