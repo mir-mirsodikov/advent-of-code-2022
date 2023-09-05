@@ -4,9 +4,8 @@
 /// The Elves take turns writing down the number of Calories contained by the various meals, snacks, rations, etc.
 /// that they've brought with them, one item per line.
 /// Each Elf separates their own inventory from the previous Elf's inventory (if any) by a blank line.
-/// 
+///
 /// https://adventofcode.com/2022/day/1
-
 use crate::utils::{get_file_for_day, print_results};
 
 /// Responsible for handling the logic for day 1
@@ -29,8 +28,8 @@ fn day_01_part_1() -> u32 {
     let mut sum: u32 = 0;
     let mut max: u32 = 0;
 
-    contents.split("\n").for_each(|line| {
-        if line == "" {
+    contents.split('\n').for_each(|line| {
+        if line.is_empty() {
             max = if sum > max { sum } else { max };
             sum = 0;
             return;
@@ -39,7 +38,7 @@ fn day_01_part_1() -> u32 {
         sum += line.parse().unwrap_or(0);
     });
 
-    return max;
+    max
 }
 
 /// Find the top three Elves carrying the most Calories. How many Calories are those Elves carrying in total?
@@ -49,14 +48,11 @@ fn day_01_part_2() -> u32 {
     let mut sum = 0;
     let mut nums = vec![0, 0, 0];
 
-    contents.split("\n").for_each(|line| {
-        if line == "" {
-            match get_insertion_position(&nums, sum) {
-                Some(i) => {
-                    nums[i] = sum;
-                    nums.sort();
-                }
-                None => {}
+    contents.split('\n').for_each(|line| {
+        if line.is_empty() {
+            if let Some(i) = get_insertion_position(&nums, sum) {
+                nums[i] = sum;
+                nums.sort();
             }
             sum = 0;
             return;
@@ -67,16 +63,16 @@ fn day_01_part_2() -> u32 {
 
     let result = nums.iter().sum::<i32>();
 
-    return result as u32;
+    result as u32
 }
 
 /// Returns the index or `None` of the position where the number should be inserted
 /// The list should be in descending order
-fn get_insertion_position(nums: &Vec<i32>, num: i32) -> Option<usize> {
+fn get_insertion_position(nums: &[i32], num: i32) -> Option<usize> {
     let mut pos: Option<usize> = Option::None;
 
-    for i in 0..nums.len() {
-        if num > nums[i] {
+    for (i, item) in nums.iter().enumerate() {
+        if num > *item {
             pos = Option::Some(i);
             break;
         }

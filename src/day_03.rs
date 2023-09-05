@@ -19,7 +19,7 @@ fn part_1() -> u32 {
 
     let mut priorities: u32 = 0;
 
-    file.split("\n").for_each(|line| {
+    file.split('\n').for_each(|line| {
         let (part1, part2) = line.split_at(line.len() / 2);
 
         let mut part_1_map = HashMap::new();
@@ -54,7 +54,7 @@ fn part_2() -> u32 {
     let mut first_map = HashMap::new();
     let mut second_map = HashMap::new();
 
-    file.split("\n").for_each(|line| {
+    file.split('\n').for_each(|line| {
         match i % 3 {
             0 => {
                 first_map.clear();

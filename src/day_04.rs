@@ -13,17 +13,17 @@ pub fn handle_day_04(part: u8) {
 }
 
 fn parse_input_line(line: &str) -> (u32, u32) {
-    let lower_bound = line[0..line.find("-").unwrap()]
+    let lower_bound = &line[0..line.find('-').unwrap()]
         .to_string()
         .parse::<u32>()
         .unwrap();
 
-    let upper_bound = &line[line.find("-").unwrap() + 1..line.len()]
+    let upper_bound = &line[line.find('-').unwrap() + 1..line.len()]
         .to_string()
         .parse::<u32>()
         .unwrap();
 
-    (lower_bound, *upper_bound)
+    (*lower_bound, *upper_bound)
 }
 
 fn part_1() -> u32 {
@@ -31,9 +31,9 @@ fn part_1() -> u32 {
 
     let mut sum = 0;
 
-    file.split("\n").for_each(|line| {
-        let (first_elf, mut second_elf) = line.split_at(line.find(",").unwrap());
-        second_elf = second_elf.trim_start_matches(",");
+    file.split('\n').for_each(|line| {
+        let (first_elf, mut second_elf) = line.split_at(line.find(',').unwrap());
+        second_elf = second_elf.trim_start_matches(',');
 
         let (first_elf_lower_bound, first_elf_upper_bound) = parse_input_line(first_elf);
         let (second_elf_lower_bound, second_elf_upper_bound) = parse_input_line(second_elf);
@@ -55,17 +55,14 @@ fn part_2() -> u32 {
 
     let mut sum = 0;
 
-    file.split("\n").for_each(|line| {
-        let (first_elf, mut second_elf) = line.split_at(line.find(",").unwrap());
-        second_elf = second_elf.trim_start_matches(",");
+    file.split('\n').for_each(|line| {
+        let (first_elf, mut second_elf) = line.split_at(line.find(',').unwrap());
+        second_elf = second_elf.trim_start_matches(',');
 
         let (first_elf_lower_bound, first_elf_upper_bound) = parse_input_line(first_elf);
         let (second_elf_lower_bound, second_elf_upper_bound) = parse_input_line(second_elf);
 
-        if first_elf_lower_bound <= second_elf_upper_bound
-            && first_elf_upper_bound >= second_elf_lower_bound
-            || second_elf_lower_bound <= first_elf_upper_bound
-                && second_elf_upper_bound >= first_elf_lower_bound
+        if first_elf_lower_bound <= second_elf_upper_bound && first_elf_upper_bound >= second_elf_lower_bound
         {
             sum += 1;
         }

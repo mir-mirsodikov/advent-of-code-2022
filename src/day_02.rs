@@ -104,9 +104,7 @@ fn play_game(player_1: String, player_2: String) -> u32 {
         (PlayersHand::Scissors, PlayersHand::Scissors) => GameOutcome::Tie,
     };
 
-    let score = outcome.get_score() + player_2.get_score();
-
-    score
+    outcome.get_score() + player_2.get_score()
 }
 
 /// Given the desired outcome and the player 1's hand
@@ -134,9 +132,7 @@ fn get_score_for_desired_outcome(outcome: String, player_1: String) -> u32 {
         (GameOutcome::Lose, PlayersHand::Scissors) => PlayersHand::Paper,
     };
 
-    let score = desired_outcome.get_score() + player_2.get_score();
-
-    score
+    desired_outcome.get_score() + player_2.get_score()
 }
 
 /// What would your total score be if everything goes exactly according to your strategy guide?
@@ -145,8 +141,8 @@ fn part_1() -> u32 {
 
     let mut score = 0;
 
-    contents.split("\n").into_iter().for_each(|line| {
-        let players = line.split(" ").collect::<Vec<&str>>();
+    contents.split('\n').for_each(|line| {
+        let players = line.split(' ').collect::<Vec<&str>>();
 
         let result = play_game(players[0].to_string(), players[1].to_string());
 
@@ -163,8 +159,8 @@ fn part_2() -> u32 {
 
     let mut score = 0;
 
-    contents.split("\n").for_each(|line| {
-        let players = line.split(" ").collect::<Vec<&str>>();
+    contents.split('\n').for_each(|line| {
+        let players = line.split(' ').collect::<Vec<&str>>();
 
         let player_1 = players[0].to_string();
         let desired_outcome = players[1].to_string();
